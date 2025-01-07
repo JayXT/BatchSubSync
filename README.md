@@ -21,5 +21,5 @@ Example of usage for subtitle to video sync (videos are located in a directory o
 
 ```
 cd /home/user/Videos/SampleTVSeries/JP-Subs
-batch_sync_subs_to_subs ../
+batch_sync_subs_to_videos ../
 ```
