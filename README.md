@@ -1,7 +1,8 @@
 # BatchSubSync
 
-The repository offers bash scripts for batch subtitle timing resynchronization using ffsubsync.
+The repository offers bash scripts for batch subtitle timing resynchronization using [ffsubsync](https://github.com/smacke/ffsubsync). Here are the details about the scripts:
 
+- ffsubsync should be installed and available in the system PATH.
 - There're two scripts for syncing all subtitles (.srt or .ass): one syncs with other subtitles (.srt or .ass) and one syncs with videos (.mkv or .mp4). 
 - Both scripts should be executed from the directory containing the subtitles to be resynced.
 - Each script requires a single parameter: a relative path to a directory containing either reference subtitle files or reference video files.
