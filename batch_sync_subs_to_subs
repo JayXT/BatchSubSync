@@ -1,0 +1,32 @@
+#!/bin/bash
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <path_to_english_subtitles>"
+    exit 1
+fi
+
+referencedir="$1"
+mkdir -p Retimed
+
+for subtoretime in ./*.{ass,srt}; do
+    [ -e "$subtoretime" ] || continue
+
+    base_name="${subtoretime##*/}"
+    base_name_no_ext="${base_name%.*}"
+
+    referencesub_ass="$referencedir/$base_name_no_ext.ass"
+    referencesub_srt="$referencedir/$base_name_no_ext.srt"
+
+    if [ -f "$referencesub_ass" ]; then
+        referencesub="$referencesub_ass"
+    elif [ -f "$referencesub_srt" ]; then
+        referencesub="$referencesub_srt"
+    else
+        echo "Warning: No matching reference subtitle found for '$base_name'. Skipping..."
+        continue
+    fi
+
+    retimed_sub="Retimed/${base_name_no_ext}_retimed.${subtoretime##*.}"
+    ffsubsync "$referencesub" -i "$subtoretime" -o "$retimed_sub"
+    echo "Retimed '$subtoretime' using '$referencesub' -> '$retimed_sub'"
+done
